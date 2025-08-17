@@ -1,0 +1,7 @@
+datasets
+ipykernel
+ipywidgets
+pandas
+snowflake-connector-python[pandas]
+spacy
+transformers[torch]
