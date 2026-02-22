@@ -38,7 +38,7 @@ def get_welch_test_stats(series: pd.Series, event_date_str: str):
             'mean_difference': np.nan,
             'message': "Insufficient data for a valid t-test in one or both groups."
         }
-    # 2. Perform the t-test (equal variance not assumed)
+    # Perform the t-test (equal variance not assumed)
     t_stat, p_value = ttest_ind(group_a, group_b, equal_var=False)
     mean_a = group_a.mean()
     mean_b = group_b.mean()
@@ -90,7 +90,7 @@ def run_welch_analysis_for_user_input(df: pd.DataFrame, target_keyword: str, eve
         results = get_welch_test_stats(time_series, event_date_str)
         all_metric_results[metric] = results
 
-    # 4. Final output structure
+    # Create output dictionary
     final_output = {
         'keyword': target_keyword,
         'cutoff_date': event_date_str,

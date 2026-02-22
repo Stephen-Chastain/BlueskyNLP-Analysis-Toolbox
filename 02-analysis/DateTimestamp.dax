@@ -1,0 +1,18 @@
+DateTimestamp = 
+VAR YearValue = VALUE( [YEAR_POST_CREATED_AT] )
+VAR m = VALUE( [MONTH_POST_CREATED_AT] )
+VAR d = VALUE( [DAY_POST_CREATED_AT] )
+
+VAR ValidMonth = NOT( ISBLANK(m) ) && m >= 1 && m <= 12
+VAR ValidDay   = NOT( ISBLANK(d) ) && d >= 1 && d <= 31
+VAR Valid      = ValidMonth && ValidDay
+
+RETURN
+IF(
+    NOT( Valid ),
+    BLANK(),
+    IFERROR(
+        DATE( YearValue, m, d ),
+        BLANK()
+    )
+)
