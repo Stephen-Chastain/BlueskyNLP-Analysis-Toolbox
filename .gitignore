@@ -1,3 +1,6 @@
 statistical_pipeline_guide.ipynb
 *.csv
 .keys*
+__pycache__/
+.ipynb_checkpoints/
+.env
