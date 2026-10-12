@@ -83,7 +83,7 @@ FROM BLUESKY_DB.MAIN.FIREHOSE_PROCESSED
     100.0 * SUM(s.positive_flag) / NULLIF(COUNT(*), 0) AS author_pct_positive,
     100.0 * SUM(s.negative_flag) / NULLIF(COUNT(*), 0) AS author_pct_negative,
     100.0 * SUM(s.neutral_flag) / NULLIF(COUNT(*), 0) AS author_pct_neutral,
-    (100.0 * SUM(s.positive_flag) - SUM(s.negative_flag)) / NULLIF(COUNT(*), 0) AS author_net_sentiment,
+    100.0 * (SUM(s.positive_flag) - SUM(s.negative_flag)) / NULLIF(COUNT(*), 0) AS author_net_sentiment,
     AVG(f.SENTIMENT_CONFIDENCE_SCORE) AS avg_sentiment_confidence,
   FROM thread_author_keyword_sentiment s
   join thread_matches f on f.THREAD_ROOT_URI = s.THREAD_ROOT_URI
