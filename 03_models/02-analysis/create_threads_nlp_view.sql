@@ -56,7 +56,7 @@ threads_nlp as
     100.0 * SUM(s.positive_flag) / NULLIF(COUNT(*), 0) AS pct_positive,
     100.0 * SUM(s.negative_flag) / NULLIF(COUNT(*), 0) AS pct_negative,
     100.0 * SUM(s.neutral_flag) / NULLIF(COUNT(*), 0) AS pct_neutral,
-    (100.0 * SUM(s.positive_flag) - SUM(s.negative_flag)) / NULLIF(COUNT(*), 0) AS net_sentiment,
+    100.0 * (SUM(s.positive_flag) - SUM(s.negative_flag)) / NULLIF(COUNT(*), 0) AS net_sentiment,
     AVG(s.avg_sentiment_confidence) AS avg_sentiment_confidence_thread
   FROM thread_author_keyword_sentiment s 
   GROUP BY s.THREAD_ROOT_URI, s.keyword, s.topic, s.category
