@@ -5,6 +5,3 @@ pandas
 snowflake-connector-python[pandas]
 spacy
 transformers[torch]
-numpy
-adfuller
-seasonal_decompose

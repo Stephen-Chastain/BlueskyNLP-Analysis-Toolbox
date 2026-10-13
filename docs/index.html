@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bluesky Sentiment Analysis — Stephen Chastain</title>
+  <style>
+    body { max-width: 960px; margin: 2rem auto; padding: 0 16px;
+           font-family: system-ui, sans-serif; line-height: 1.6; color: #222; }
+    a { color: #0b5cad; }
+    .back { font-size: 0.9rem; }
+    .meta { color: #555; margin-top: -0.5rem; }
+    .viz { position: relative; width: 100%; height: 820px; border: 1px solid #ddd;
+           border-radius: 6px; overflow: hidden; margin: 1.5rem 0 0.5rem; }
+    .viz iframe { width: 100%; height: 100%; border: 0; }
+    .viz-note { font-size: 0.9rem; color: #555; }
+    .links a { margin-right: 1.25rem; }
+    @media (max-width: 600px) { .viz { height: 600px; } }
+  </style>
+</head>
+<body>
+  <p class="back"><a href="/">&larr; All projects</a></p>
+
+  <h1>Bluesky Political Sentiment Analysis</h1>
+  <p class="meta">Snowflake · SQL · Python (statsmodels, SciPy) · Tableau</p>
+
+  <!-- REPLACE: your explanatory text. Keep paragraphs in <p> tags. -->
+  <p>
+    How do Bluesky users talk about political and cultural topics, and does that
+    change over time? This project matches NLP-labeled posts from the Bluesky
+    firehose (Summer 2025) against a list of keywords, aggregates sentiment at the
+    thread level to avoid over-counting multi-post threads, and tests the results
+    statistically: sample-size checks, chi-square goodness-of-fit, stationarity,
+    seasonal decomposition and correlation.
+  </p>
+
+  <div class="viz">
+    <iframe
+      src="https://public.tableau.com/views/DailyKeywordsSentimentDashboard/KeywordTimeseriesDashboard?:showVizHome=no&:embed=true"
+      title="Bluesky sentiment dashboard (Tableau Public)"
+      loading="lazy"
+      allowfullscreen></iframe>
+  </div>
+  <p class="viz-note">
+    Interactive dashboard. Best viewed on a desktop screen —
+    <a href="https://public.tableau.com/views/DailyKeywordsSentimentDashboard/KeywordTimeseriesDashboard">open full screen on Tableau Public</a>.
+  </p>
+
+  <h2>Method in brief</h2>
+  <ul>
+    <li><strong>Sampling:</strong> an interrupted census — every post in a 5-minute window, every 3 hours — so time series are aggregated by day.</li>
+    <li><strong>Threads, not posts:</strong> each author × keyword × thread counts once per sentiment, removing pseudoreplication from self-reply chains.</li>
+    <li><strong>Quality filter:</strong> only sentiment labels with confidence above 0.6.</li>
+    <li><strong>Tests:</strong> Cochran's sample size, chi-square vs. an even sentiment split, Augmented Dickey-Fuller, seasonal decomposition (weekly period), Pearson correlation and Welch's t-test for before/after event comparisons.</li>
+  </ul>
+
+  <p class="links">
+    <a href="https://github.com/Stephen-Chastain/BlueskyNLP-Analysis-Toolbox">Code on GitHub</a>
+  </p>
+</body>
+</html>
